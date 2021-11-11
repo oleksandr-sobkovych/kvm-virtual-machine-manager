@@ -1,5 +1,5 @@
 # Project: KBM-based VMM (Hypervisor)
-Authors (team): 
+Authors (team): Oleksa Hryniv, Nazarii Kuspys, Dmytro Lutchyn, [Oleksandr Sobkovych](https://github.com/oleksandr-sobkovych)
 ## Before 
 
 
@@ -10,6 +10,12 @@ Authors (team):
 
 
 ### Usage
+
+From bin/:
+
+```bash
+./kbm-vmm ../data/kernels/test-bzImage2
+```
 
 
 # Results
