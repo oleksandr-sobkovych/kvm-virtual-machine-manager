@@ -1,0 +1,26 @@
+name: Windows
+
+on:
+#   pull_request:
+#     branches: [ master ]
+  workflow_dispatch:
+  # push:
+    # branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-2019
+    env:
+      BOOST_ROOT : "/usr/local/share/boost/1.72.0"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get latest CMake and ninja
+        # Using 'latest' branch, the most recent CMake and ninja are installed.
+        uses: lukka/get-cmake@latest
+
+      - name: Configure
+        run: cmake -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON -DENABLE_PVS_STUDIO=OFF -DBOOST_ROOT="$env:BOOST_ROOT_1_72_0" -DBOOST_INCLUDEDIR="$env:BOOST_ROOT_1_72_0"\boost\include -DBOOST_LIBRARYDIR="$env:BOOST_ROOT_1_72_0"\lib -DBoost_USE_STATIC_LIBS=ON -DBoost_USE_MULTITHREADED=ON -Bbuild
+
+      - name: Build
+        run: cmake --build build 

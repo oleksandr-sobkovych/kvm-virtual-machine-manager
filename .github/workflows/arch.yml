@@ -1,0 +1,40 @@
+name: Arch_Linux
+
+on:
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+  # push:
+    # branches: [ master ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux
+    strategy:
+      matrix:
+        cc: [gcc, clang]
+        include:
+          - cc: gcc
+            cxx: g++
+          - cc: clang
+            cxx: clang++
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        pacman -Suy --noconfirm
+        sed 's/\r$//' dependencies/pacman.txt | sed 's/#.*//' | xargs pacman -S --noconfirm
+        rm -rf /usr/bin/cc
+        rm -rf /usr/bin/c++
+
+    - name: Configure
+      run: CMAKE_C_COMPILER=${{ matrix.cc }} CMAKE_CXX_COMPILER=${{ matrix.cxx }} cmake -DENABLE_PVS_STUDIO=OFF -G"Unix Makefiles" -Bbuild
+
+    - name: Build
+      run: cmake --build build
