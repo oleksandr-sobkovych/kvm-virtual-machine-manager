@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 #! Check every comment after the "#!"
 
 #! CHANGE YOUR PROJECT NAME
-set(PROJECT_NAME test)
+set(PROJECT_NAME kbm-vmm)
 project(${PROJECT_NAME} C CXX) # project(${PROJECT_NAME} C CXX ASM)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -30,11 +30,6 @@ include_directories(include)
 
 #! Project source compilation
 add_executable(${PROJECT_NAME} src/main.cpp)
-
-#! Add external packages
-find_package(Boost 1.71.0 COMPONENTS program_options REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} Boost::program_options)
 
 #! set output directory (bin)
 set_target_properties(${PROJECT_NAME}
