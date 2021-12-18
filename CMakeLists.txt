@@ -18,28 +18,28 @@ set(ENABLE_PVS_STUDIO OFF)
 set(ENABLE_SANITIZERS OFF)
 
 #! Set output directories
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 #! Build release version if not specified otherwise.
 if (NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Release)
+    set(CMAKE_BUILD_TYPE Release)
 endif ()
 
 #! Include headers
 include_directories(include)
 
 #! Project source compilation
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/vcpu.cpp src/guest.cpp src/main.cpp)
 
 #! set output directory (bin)
 set_target_properties(${PROJECT_NAME}
-						PROPERTIES
-						RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+        PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 #####################################
 # Define ALL_TARGETS variable to use in PVS and Sanitizers
-set (ALL_TARGETS ${PROJECT_NAME})
+set(ALL_TARGETS ${PROJECT_NAME})
 
 # Include fixed CMake configuration
 include(cmake/config.cmake)
- 
+

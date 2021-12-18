@@ -1,5 +1,5 @@
 # Project: KBM-based VMM (Hypervisor)
-Authors (team): Oleksa Hryniv, Nazarii Kuspys, Dmytro Lutchyn, [Oleksandr Sobkovych](https://github.com/oleksandr-sobkovych)
+Authors (team): [Oleksa Hryniv](https://github.com/PhantomOfTheOpera), [Nazarii Kuspys](https://github.com/nazar1ous), [Dmytro Lutchyn](https://github.com/dlutchyn), [Oleksandr Sobkovych](https://github.com/oleksandr-sobkovych)
 ## Before 
 
 
