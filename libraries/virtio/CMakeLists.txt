@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 #! Check every comment after the "#!"
 
 #! CHANGE YOUR PROJECT NAME
-set(PROJECT_NAME kvm-vmm)
+set(PROJECT_NAME virtio-lib)
 project(${PROJECT_NAME} C CXX) # project(${PROJECT_NAME} C CXX ASM)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -18,22 +18,18 @@ set(ENABLE_PVS_STUDIO OFF)
 set(ENABLE_SANITIZERS OFF)
 
 #! Set output directories
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 
 #! Build release version if not specified otherwise.
 if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif ()
 
-add_subdirectory(test/performance)
-
 #! Include headers
 include_directories(include)
 
 #! Project source compilation
-add_executable(${PROJECT_NAME} src/vcpu.cpp src/guest.cpp src/main.cpp)
-
-target_link_libraries(${PROJECT_NAME} PUBLIC virtio-lib)
+add_library(${PROJECT_NAME} SHARED src/9p.c src/blk.c console.c)
 
 #! set output directory (bin)
 set_target_properties(${PROJECT_NAME}
@@ -43,6 +39,3 @@ set_target_properties(${PROJECT_NAME}
 #####################################
 # Define ALL_TARGETS variable to use in PVS and Sanitizers
 set(ALL_TARGETS ${PROJECT_NAME})
-
-# Include fixed CMake configuration
-include(cmake/config.cmake)
